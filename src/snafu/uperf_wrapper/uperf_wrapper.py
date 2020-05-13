@@ -13,7 +13,7 @@
 
 import os
 
-from uperf_wrapper.trigger_uperf import Trigger_uperf
+from .trigger_uperf import Trigger_uperf
 
 
 class uperf_wrapper():
