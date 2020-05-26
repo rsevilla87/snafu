@@ -10,9 +10,6 @@ export SNAFU_IMAGE_TAG=${SNAFU_IMAGE_TAG:-snafu_ci}
 export SNAFU_WRAPPER_IMAGE_PREFIX="$image_location/$image_account"
 echo "posting container images to $image_location with account $image_account"
 export image_builder=${SNAFU_IMAGE_BUILDER:-podman}
-if [ "$USER" != "root" ] ; then
-  SUDO=sudo
-fi
 NOTOK=1
 
 # see kubernetes initialization on last line of this script
@@ -60,7 +57,7 @@ function check_es() {
   uuid=$1
   index=${@:2}
   for my_index in $index; do
-    python3 src/ci/check_es.py -s $es_server -p $es_port -u $uuid -i $my_index \
+    python3 ci/check_es.py -s $es_server -p $es_port -u $uuid -i $my_index \
       || exit $NOTOK
   done
 }
